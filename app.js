@@ -406,7 +406,7 @@
 
 
 // function Header() {
-    
+
 
 // let th = document.createElement('th')
 // tr.appendChild(th)
@@ -417,13 +417,13 @@
 
 
 // for (let i = 0; i < hours.length; i++) {
-    
+
 
 //     let th = document.createElement('th')
 //     tr.appendChild(th);
 
 //     th.textContent = hours[i];
-    
+
 // }
 
 // let Daily=document.createElement('th')
@@ -444,15 +444,15 @@
 //         let td=document.createElement('td')
 //         tr.appendChild(td)
 //         td.textContent=this.avgCookiespPerHour[i]
-        
+
 //     }
 
 //     let last=document.createElement('th')
 //     tr.appendChild(last)
 //     last.textContent=this.total
 
-    
-    
+
+
 // }
 
 
@@ -472,18 +472,18 @@
 //         for (let j = 0; j < Shops.length; j++) {
 //           totalPerHour=totalPerHour + this.Shops[j].avgCookiespPerHour[i]
 //           totaloftotals=totaloftotals+  this.Shops[j].avgCookiespPerHour[i]
-            
+
 //         }
 //         let td=document.createElement('th')
 //         lastrow.appendChild(td)
 //         td.textContent=totalPerHour
-        
+
 //     }
 //     let lastele=document.createElement('th')
 //     lastrow.appendChild(lastele)
 //     lastele.textContent=totaloftotals
-    
-    
+
+
 // }
 
 
@@ -523,55 +523,55 @@
 
 
 
-let hours=['6:00 Am', '7:00 Am','8:00 Am','9:00 Am','10:00 Am','11:00 Am','12:00 Pm','1:00 Pm','2:00 Pm','3:00 Pm','4:00 Pm','5:00 Pm','6:00 Pm','7:00 Pm',];
+let hours = ['6:00 Am', '7:00 Am', '8:00 Am', '9:00 Am', '10:00 Am', '11:00 Am', '12:00 Pm', '1:00 Pm', '2:00 Pm', '3:00 Pm', '4:00 Pm', '5:00 Pm', '6:00 Pm', '7:00 Pm',];
 
 function Random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-  let allShops=[];
+let allShops = [];
 
-  function Shops(name,max,min,avg) {
-      
-  
-      this.name=name ;
-      this.max=max;
-      this.min=min;
-      this.avg=avg;
-      this.randomCustomerPerHour=[];
-      this.avgCookiesPerHour=[];
-      allShops.push(this);
-      this.total=0
+function Shops(name, max, min, avg) {
 
 
-      
-  }
+    this.name = name;
+    this.max = max;
+    this.min = min;
+    this.avg = avg;
+    this.randomCustomerPerHour = [];
+    this.avgCookiesPerHour = [];
+    allShops.push(this);
+    this.total = 0
 
-Shops.prototype.getrandomCustomerPerHour=function () {
+
+
+}
+
+Shops.prototype.getrandomCustomerPerHour = function () {
     for (let i = 0; i < hours.length; i++) {
-        this.randomCustomerPerHour.push(Random(this.min,this.max))
-        
+        this.randomCustomerPerHour.push(Random(this.min, this.max))
+
     }
-    
-    
+
+
 };
 
-Shops.prototype.getavgCookiesPerHour=function () {
+Shops.prototype.getavgCookiesPerHour = function () {
     for (let i = 0; i < hours.length; i++) {
-        this.avgCookiesPerHour.push(this.randomCustomerPerHour[i] * this.avg);
+        this.avgCookiesPerHour.push(Math.floor(this.randomCustomerPerHour[i] * this.avg));
 
-        this.total=this.total + this.avgCookiesPerHour[i];
-        
+        this.total = this.total + this.avgCookiesPerHour[i];
+
     }
-    
-    
+
+
 };
 
-let Seattle= new Shops('Seattle' ,9,3,5)
-let Tokyo= new Shops('Tokyo' ,8,3,4)
-let Dubai= new Shops('Dubai' ,7,3,3)
-let Paris= new Shops('Paris' ,6,3,3)
-let Lima= new Shops('Lima' ,5,3,3)
+let Seattle = new Shops('Seattle', 9, 3, 5)
+let Tokyo = new Shops('Tokyo', 8, 3, 4)
+let Dubai = new Shops('Dubai', 7, 3, 3)
+let Paris = new Shops('Paris', 6, 3, 3)
+let Lima = new Shops('Lima', 5, 3, 3)
 
 
 
@@ -580,9 +580,10 @@ console.log(allShops);
 
 /////////////////////////////////////////
 
-let rework=document.getElementById('rework')
+let rework = document.getElementById('rework')
 
-let table=document.createElement('table')
+let table = document.createElement('table')
+table.setAttribute('id','table')
 
 rework.appendChild(table)
 
@@ -591,86 +592,91 @@ rework.appendChild(table)
 
 function Header() {
 
-    let tr=document.createElement('tr')
+    let tr = document.createElement('tr')
     table.appendChild(tr)
-    let th=document.createElement('th')
+    let th = document.createElement('th')
     tr.appendChild(th)
-    th.textContent='Name'
+    th.textContent = 'Name'
 
     for (let i = 0; i < hours.length; i++) {
-        let hoursTh=document.createElement('th')
+        let hoursTh = document.createElement('th')
         tr.appendChild(hoursTh)
-        hoursTh.textContent=hours[i]
-        
-    }
-    let lastele=document.createElement('th')
-    tr.appendChild(lastele)
-    lastele.textContent='Daily Total'
+        hoursTh.textContent = hours[i]
 
-    
+    }
+    let lastele = document.createElement('th')
+    tr.appendChild(lastele)
+    lastele.textContent = 'Daily Total'
+
+
 }
 
 
 // Render
-Shops.prototype.Render=function () {
-    
+Shops.prototype.Render = function () {
 
-    let tr=document.createElement('tr')
+
+    let tr = document.createElement('tr')
     table.appendChild(tr)
-    let firstTh=document.createElement('th')
+    let firstTh = document.createElement('th')
     tr.appendChild(firstTh)
-    firstTh.textContent=this.name
+    firstTh.textContent = this.name
 
     for (let i = 0; i < hours.length; i++) {
-        let avgTd=document.createElement('td')
+        let avgTd = document.createElement('td')
         tr.appendChild(avgTd)
-        avgTd.textContent=this.avgCookiesPerHour[i]
-        
+        avgTd.textContent = this.avgCookiesPerHour[i]
+
     }
 
-    let lasrAvgele=document.createElement('th')
+    let lasrAvgele = document.createElement('th')
     tr.appendChild(lasrAvgele)
-    lasrAvgele.textContent=this.total
-    
+    lasrAvgele.textContent = this.total
+
 }
+
+
+    
+
+    
 
 
 // Footer
 
 
 
-function Footer () {
-    let footerTr=document.createElement('tr')
-table.appendChild(footerTr)
-let footerTh=document.createElement('th')
-footerTr.appendChild(footerTh)
-footerTh.textContent='Total'
-let totaloftotals=0
+function Footer() {
+    let footerTr = document.createElement('tr')
+    table.appendChild(footerTr)
+    let footerTh = document.createElement('th')
+    footerTr.appendChild(footerTh)
+    footerTh.textContent = 'Total'
+    let totaloftotals = 0
 
-for (let i = 0; i < hours.length; i++) {
-    let totalCookiesPerHourForAllShops=0
-    
-    for (let j = 0; j < allShops.length; j++) {
-        totalCookiesPerHourForAllShops +=allShops[j].avgCookiesPerHour[i]
-        totaloftotals +=allShops[j].avgCookiesPerHour[i]
-        
-        
+    for (let i = 0; i < hours.length; i++) {
+        let totalCookiesPerHourForAllShops = 0
+
+        for (let j = 0; j < allShops.length; j++) {
+            totalCookiesPerHourForAllShops += allShops[j].avgCookiesPerHour[i]
+            totaloftotals += allShops[j].avgCookiesPerHour[i]
+
+
+        }
+        let totalTh = document.createElement('th')
+        footerTr.appendChild(totalTh)
+        totalTh.textContent = totalCookiesPerHourForAllShops
+
+
     }
-    let totalTh=document.createElement('th')
-    footerTr.appendChild(totalTh)
-    totalTh.textContent=totalCookiesPerHourForAllShops
-
-    
-}
 
 
-    let lastelemnt=document.createElement('th')
+    let lastelemnt = document.createElement('th')
     footerTr.appendChild(lastelemnt)
-    lastelemnt.textContent=totaloftotals
- 
-    
+    lastelemnt.textContent = totaloftotals
 
-    
+
+
+
 }
 
 
@@ -680,8 +686,41 @@ for (let i = 0; i < allShops.length; i++) {
     allShops[i].getrandomCustomerPerHour();
     allShops[i].getavgCookiesPerHour();
     allShops[i].Render();
-    
+
 }
 Footer();
 
 console.log(table);
+
+
+///////////////////////////
+
+let form = document.getElementById('form');
+form.addEventListener('submit', formSubmitter);
+
+function deleteRow() {
+    
+   document.getElementById("table").deleteRow(-1)
+}
+
+
+function formSubmitter(event) {
+    event.preventDefault();
+    console.log(event);
+  
+
+    let name = event.target.Namefield.value
+    let max = event.target.MaxField.value
+    let min = event.target.MinField.value
+    let avg = event.target.AvgField.value 
+    
+
+    let customerShop = new Shops(name, max, min, avg)
+    deleteRow();
+    customerShop.getrandomCustomerPerHour();
+    customerShop.getavgCookiesPerHour();
+    customerShop.Render();
+
+    Footer();
+
+}
